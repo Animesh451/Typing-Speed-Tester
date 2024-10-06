@@ -1,0 +1,46 @@
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class TypingSpeedTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Sample sentence for the typing test
+        String testSentence = "The quick brown fox jumps over the lazy dog.";
+
+        System.out.println("Typing Speed Test!");
+        System.out.println("Type the following sentence as fast as you can:");
+        System.out.println(testSentence);
+        System.out.println("Press Enter when you're ready to start...");
+
+        scanner.nextLine();  // Wait for the user to press Enter
+
+        long startTime = System.nanoTime();  // Start the timer
+
+        // Get the user input
+        String userTyped = scanner.nextLine();
+
+        long endTime = System.nanoTime();  // End the timer
+
+        // Calculate time taken in seconds
+        long timeTaken = TimeUnit.SECONDS.convert(endTime - startTime, TimeUnit.NANOSECONDS);
+
+        // Calculate the number of words in the test sentence
+        int wordCount = testSentence.split(" ").length;
+
+        // Calculate typing speed in words per minute (WPM)
+        double wordsPerMinute = (wordCount / (double) timeTaken) * 60;
+
+        // Compare user input with the test sentence to check accuracy
+        if (userTyped.equals(testSentence)) {
+            System.out.println("Well done! Your typing is correct.");
+        } else {
+            System.out.println("There were some mistakes in your typing.");
+        }
+
+        System.out.println("Time taken: " + timeTaken + " seconds");
+        System.out.printf("Your typing speed is: %.2f words per minute (WPM)\n", wordsPerMinute);
+        
+        scanner.close();
+    }
+}
